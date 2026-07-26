@@ -226,20 +226,20 @@
 
         <div class="candidate-info">
           <!--  ¡Gracias por tu consulta y tu confianza!<br> -->
-            <strong>MARCELO RIVERA</strong><br>
+            <strong>NOMBRE DEL CANDIDATO</strong><br>
             CONCEJAL 2026 <br>
-            Lista 1 - Opción 1 <br>
+            Lista 1 - Opción __ <br>
             Fernando de la Mora - PY
         </div>
 
         <div class="proposal-link">
-            <a href="#" id="open-proposal">COMO VOTAR POR MARCELO RIVERA (ver)</a>
+            <a href="#" id="open-proposal">COMO VOTAR POR EL CANDIDATO (ver)</a>
         </div>
 
         <div class="proposal-link">
-            <a href="https://simuladoroficial.tsje.gov.py/sufragio.html?ubicacion=59.11.3" onclick="window.open(this.href, 'simulador', 'width=1024,height=768,scrollbars=yes,resizable=yes'); return false;">ABRIR SIMULADOR DE VOTACION</a>
+            <a href="#" id="open-simulator">ABRIR SIMULADOR DE VOTACION</a>
         </div>
-        
+
         <div class="footer-text">
             Padrón Municipales 2026 - Fernando de la Mora.
         </div>
@@ -253,6 +253,19 @@
                 <button class="btn btn-orange" id="read-online">Leer en Linea</button>
                 <button class="btn btn-outline" id="download-pdf">Descargar PDF</button>
                 <button class="btn" style="color: var(--text-muted); margin-top: 8px;" id="close-modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Simulator Modal -->
+    <div id="simulator-modal" class="modal">
+        <div class="modal-content" style="max-width: 95%; width: 600px; height: 80vh; display: flex; flex-direction: column;">
+            <div class="modal-title" style="margin-bottom: 12px;">SIMULADOR DE VOTACIÓN</div>
+            <div style="flex: 1; margin-bottom: 16px; position: relative; border: 2px solid #e5e7eb; border-radius: 12px; overflow: hidden; background-color: #f9fafb;">
+                <iframe src="about:blank" id="simulator-iframe" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+            <div class="modal-btns">
+                <button class="btn btn-orange" id="close-simulator">CERRAR SIMULADOR</button>
             </div>
         </div>
     </div>
@@ -429,6 +442,30 @@
         window.addEventListener('click', (e) => {
             if (e.target === modal) {
                 modal.style.display = 'none';
+            }
+        });
+
+        // Simulator Modal Logic
+        const simulatorModal = document.getElementById('simulator-modal');
+        const openSimulatorBtn = document.getElementById('open-simulator');
+        const closeSimulatorBtn = document.getElementById('close-simulator');
+        const simulatorIframe = document.getElementById('simulator-iframe');
+
+        openSimulatorBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            simulatorIframe.src = 'https://simuladoroficial.tsje.gov.py/sufragio.html?ubicacion=59.11.3';
+            simulatorModal.style.display = 'flex';
+        });
+
+        closeSimulatorBtn.addEventListener('click', () => {
+            simulatorModal.style.display = 'none';
+            simulatorIframe.src = 'about:blank';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === simulatorModal) {
+                simulatorModal.style.display = 'none';
+                simulatorIframe.src = 'about:blank';
             }
         });
 
