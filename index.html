@@ -229,8 +229,12 @@
                  <img src="padronapp1.png" alt="logo" class="logo">
         </div>
 
-        <div class="proposal-link">
+        <div class="proposal-link" style="display: none;">
             <a href="#" id="open-proposal">COMO VOTAR POR EL CANDIDATO (ver)</a>
+        </div>
+
+        <div style="margin: 16px 0; display: flex; justify-content: center;">
+            <button class="btn btn-orange" id="btn-como-votar" style="width: 100%; max-width: 500px;">COMO VOTAR</button>
         </div>
 
         <div class="footer-text">
@@ -392,8 +396,15 @@
             toggleSearchState(false);
         });
 
+        const btnComoVotar = document.getElementById('btn-como-votar');
+
         // Modal Logic
         openBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modal.style.display = 'flex';
+        });
+
+        btnComoVotar.addEventListener('click', (e) => {
             e.preventDefault();
             modal.style.display = 'flex';
         });
